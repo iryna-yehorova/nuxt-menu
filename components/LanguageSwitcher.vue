@@ -2,8 +2,11 @@
     <v-menu v-model="languageMenu" offset-y>
         <template v-slot:activator="{ on, attrs }">
             <v-btn class="text-capitalize" v-bind="attrs" v-on="on" text>
-                {{ activeLang.name }}
-                <v-icon small right>mdi-menu-down</v-icon>
+                <div v-if="$vuetify.breakpoint.mdAndUp">
+                    {{ activeLang.name }}
+                    <v-icon small right>mdi-menu-down</v-icon>
+                </div>
+                <div v-else> {{activeLang.code}} </div>
             </v-btn>
         </template>
         <v-list dense>
