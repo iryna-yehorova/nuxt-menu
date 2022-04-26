@@ -9,7 +9,7 @@ async function getLocales() {
         const response = await http.get('/i18n/locales')
         return response.data
     } catch(err) {
-        return err
+        return new Error(err.text);
     }
 }
 
@@ -22,7 +22,7 @@ async function getMenuItems(locale) {
         })
         return response.data
     } catch(err) {
-        return err
+        return new Error(err.text);
     }
 }
 
