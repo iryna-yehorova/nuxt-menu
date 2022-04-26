@@ -11,8 +11,8 @@
 
       <v-list class="d-flex py-0 " light color="blue" v-if="$vuetify.breakpoint.mdAndUp">
         <v-list-item
-          v-for="(item, index) in list"
-          :key="index"
+          v-for="item in list"
+          :key="item.id"
         >
           <v-menu v-if="item.submenu && item.submenu.length > 0" offset-y open-on-hover>
             <template v-slot:activator="{ on, attrs }">
@@ -29,10 +29,10 @@
             </template>
             <v-list>
               <v-list-item
-                v-for="(subItem, index) in item.submenu"
-                :key="index"
+                v-for="subItem in item.submenu"
+                :key="subItem.id"
               >
-                <NuxtLink :to="{ name: item.route + '-' + subItem.route, params: { [item.route]: item.slug, [subItem.route]: subItem.slug }}">{{ subItem.name }}</NuxtLink>
+                <NuxtLink :to="{ name: getRouteName(item, subItem), params: getRouteParams(item, subItem) }">{{ subItem.name }}</NuxtLink>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -98,6 +98,14 @@ export default {
       group: null,
     }
   },
+  computed: {
+    getRouteName(item, subItem) {
+      return item.route + '-' + subItem.route
+    },
+    getRouteParams(item, subItem) {
+     return { [item.route]: item.slug, [subItem.route]: subItem.slug }
+    }
+  },
   methods: {
     async getMenuData(code) {
       if (this.code === code) {
@@ -107,7 +115,6 @@ export default {
 
       //common ancestor for localization variants could be added to the api
       this.list = this.list.map((item, index) => {
-        
         return {
           ...item,
           slug: res[index].slug,
@@ -127,7 +134,6 @@ export default {
 
       this.code = code;
     },
-
   }
 }
 </script>
