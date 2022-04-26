@@ -1,11 +1,12 @@
 <template>
   <v-row justify="center" align="center">
-    <span>Page still in developing</span>
+    <span>Still in developing</span>
   </v-row>
 </template>
 
+
 <script>
-export default {
-  name: 'index'
-}
+  export default {
+    name: 'about',
+  }
 </script>
