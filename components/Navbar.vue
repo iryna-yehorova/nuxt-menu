@@ -32,7 +32,7 @@
                 v-for="(subItem, index) in item.submenu"
                 :key="index"
               >
-                <NuxtLink :to="{ name: item.route + '/' + subItem.route, params: { [item.route]: item.slug, [subItem.route]: subItem.route }}">{{ subItem.name }}</NuxtLink>
+                <NuxtLink :to="{ name: item.route + '-' + subItem.route, params: { [item.route]: item.slug, [subItem.route]: subItem.slug }}">{{ subItem.name }}</NuxtLink>
               </v-list-item>
             </v-list>
           </v-menu>
