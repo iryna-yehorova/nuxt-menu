@@ -32,7 +32,7 @@
                 v-for="subItem in item.submenu"
                 :key="subItem.id"
               >
-                <NuxtLink :to="{ name: getRouteName(item, subItem), params: getRouteParams(item, subItem) }">{{ subItem.name }}</NuxtLink>
+                <NuxtLink :to="{ name: getRouteName(item.route, subItem.route), params: getRouteParams(item, subItem) }">{{ subItem.name }}</NuxtLink>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -98,14 +98,6 @@ export default {
       group: null,
     }
   },
-  computed: {
-    getRouteName(item, subItem) {
-      return item.route + '-' + subItem.route
-    },
-    getRouteParams(item, subItem) {
-     return { [item.route]: item.slug, [subItem.route]: subItem.slug }
-    }
-  },
   methods: {
     async getMenuData(code) {
       if (this.code === code) {
@@ -134,6 +126,12 @@ export default {
 
       this.code = code;
     },
+    getRouteName(item, subItem) {
+      return item + '-' + subItem
+    },
+    getRouteParams(item, subItem) {
+     return { [item.route]: item.slug, [subItem.route]: subItem.slug }
+    }
   }
 }
 </script>

@@ -6,7 +6,6 @@ const http = axios.create({
 
 async function getLocales() {
     try {
-        console.log(http)
         const response = await http.get('/i18n/locales')
         return response.data
     } catch(err) {
